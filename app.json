@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Kairo-Mobile",
-    "slug": "Kairo-Mobile",
-    "version": "1.0.0",
+    "name": "Kairo",
+    "slug": "Kairo",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "kairomobile",
