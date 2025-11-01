@@ -6,18 +6,17 @@
 // in whole or in part, is strictly prohibited without written permission.
 // -----------------------------------------------------------------------------
 
-import { Text, View } from "react-native";
 
-export default function Index() {
+import { Stack } from "expo-router";
+import { StatusBar } from "react-native";
+
+export default function RootLayout() {
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+    <Stack screenOptions={{headerShown:false}}>
+      
+      <StatusBar barStyle="default" />
+    </Stack>
+  
+);
 }
