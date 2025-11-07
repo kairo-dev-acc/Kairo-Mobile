@@ -1,35 +1,89 @@
-import { View, TextInput, StyleSheet } from 'react-native';
-import React from 'react';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+export default function Input({
+  value: propValue = "",
+  onChange,
+  placeholder,
+  error,
+}) {
+  const [text, setText] = useState(propValue);
+  const [isFocused, setIsFocused] = useState(false);
 
-export default function Input({ value, onChange, placeholder }) {
+  useEffect(() => {
+    setText(propValue);
+  }, [propValue]);
+
+  const handleChange = (newText) => {
+    setText(newText);
+    onChange?.(newText);
+  };
+
   return (
-    <View>
+    <View style={{ marginBottom: error ? 12 : 0 }}>
       <TextInput
         style={[
           styles.input,
-          value ? styles.inputActive : null,
+          isFocused && styles.inputFocused,
+          text ? styles.inputActive : null,
+          error ? styles.inputError : null,
         ]}
         placeholder={placeholder}
-        value={value}
-        onChangeText={onChange}
+        placeholderTextColor={error ? "#D93025" : "#999"}
+        value={text}
+        onChangeText={handleChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
+
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorIcon}>
+            <MaterialIcons name="error" size={24} color="#D93025" />
+          </Text>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    height: 48,
-    paddingVertical: 17,
+    borderColor: "#ccc",
+    borderWidth: 2,
+    height: 54,
+    paddingVertical: 16,
     paddingHorizontal: 12,
     borderRadius: 8,
     fontSize: 17.28,
-    fontWeight: 400,
+    fontWeight: "400",
     marginHorizontal: 27,
+    color: "#000",
+  },
+  inputFocused: {
+    borderColor: "#000000ff",
   },
   inputActive: {
-    borderColor: '#000000ff',
+    borderColor: "#000",
+  },
+  inputError: {
+    borderColor: "#D93025",
+    backgroundColor: "#FFF2F2",
+  },
+  errorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 6,
+    marginHorizontal: 27,
+  },
+  errorIcon: {
+    color: "#D93025",
+    marginRight: 6,
+    fontSize: 14,
+  },
+  errorText: {
+    color: "#D93025",
+    fontSize: 14,
   },
 });
