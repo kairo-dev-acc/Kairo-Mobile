@@ -10,7 +10,7 @@ import { Link } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLOR } from "../constants/color.js";
 
-export default function button({ textName, TextColor, backgroundColor, onPressfunction }) {
+export default function button({ textName, TextColor, backgroundColor, onPressfunction, icon, iconSvg }) {
   return (
       
         <TouchableOpacity
@@ -20,9 +20,10 @@ export default function button({ textName, TextColor, backgroundColor, onPressfu
           ]}
           onPress={onPressfunction}
         >
+          {iconSvg}
           <Text style={[styles.text,
             { color: TextColor }
-          ]}>{textName}</Text>
+          ]}>{icon}{textName}</Text>
         </TouchableOpacity>
   );
 }
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
     paddingVertical: 16,
     marginHorizontal: 27,
   },

@@ -39,7 +39,7 @@ export default function Input({
       {error ? (
         <View style={styles.errorContainer}>
           <Text style={styles.errorIcon}>
-            <MaterialIcons name="error" size={24} color="#D93025" />
+            <MaterialIcons name="error" size={16} color="#D93025" />
           </Text>
           <Text style={styles.errorText}>{error}</Text>
         </View>
@@ -50,7 +50,8 @@ export default function Input({
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: "#ccc",
+    borderColor: "#0000001e",
+    backgroundColor: "#F6F6F6",
     borderWidth: 2,
     height: 54,
     paddingVertical: 16,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   errorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 10,
     marginHorizontal: 27,
   },
   errorIcon: {
