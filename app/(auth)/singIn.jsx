@@ -42,6 +42,16 @@ export default function Signup() {
     console.log("Continue with email:", email);
   };
 
+    const handleAppleSignup = () => {
+    console.log("Continue with email:", email);
+  };
+  const handleGoogleSignup = () => {
+    console.log("Continue with email:", email);
+  };
+  const handleFacebookSignup = () => {
+    console.log("Continue with email:", email);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -90,7 +100,7 @@ export default function Signup() {
               textName="Continue with Apple"
               TextColor="#156F70"
               backgroundColor="#CFF8F3"
-              onPressfunction={handleContinue}
+              onPressfunction={handleAppleSignup}
               icon={<AntDesign name="apple" size={15} color="black" />}
             />
 
@@ -98,7 +108,7 @@ export default function Signup() {
               textName="Continue with Google"
               TextColor="#156F70"
               backgroundColor="#CFF8F3"
-              onPressfunction={handleContinue}
+              onPressfunction={handleGoogleSignup}
               iconSvg={<GoogleIcon width={14} height={15} />}
             />
 
@@ -106,7 +116,7 @@ export default function Signup() {
               textName=" Continue with Facebook"
               TextColor="#156F70"
               backgroundColor="#CFF8F3"
-              onPressfunction={handleContinue}
+              onPressfunction={handleFacebookSignup}
               icon={<FontAwesome5 name="facebook" size={15} color="#1877F2" />}
             />
           </View>

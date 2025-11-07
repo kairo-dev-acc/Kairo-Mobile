@@ -8,7 +8,7 @@
 
 import { Link } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { COLOR } from "../constants/color.js";
+// import { COLOR } from "../constants/color.js";
 
 export default function button({ textName, TextColor, backgroundColor, onPressfunction, icon, iconSvg }) {
   return (
