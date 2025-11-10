@@ -6,6 +6,7 @@ export default function Input({
   onChange,
   placeholder,
   error,
+  keyboardType
 }) {
   const [text, setText] = useState(propValue);
   const [isFocused, setIsFocused] = useState(false);
@@ -34,6 +35,8 @@ export default function Input({
         onChangeText={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        keyboardType ={keyboardType}
+        autoCapitalize="none"
       />
 
       {error ? (
@@ -50,9 +53,7 @@ export default function Input({
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: "#0000001e",
     backgroundColor: "#F6F6F6",
-    borderWidth: 2,
     height: 54,
     paddingVertical: 16,
     paddingHorizontal: 12,
@@ -63,10 +64,11 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   inputFocused: {
-    borderColor: "#000000ff",
+    borderColor: "#393838ff",
+    borderWidth: 2,
   },
   inputActive: {
-    borderColor: "#000",
+    borderColor: "#393838ff",
   },
   inputError: {
     borderColor: "#D93025",

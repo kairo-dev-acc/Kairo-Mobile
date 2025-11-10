@@ -7,16 +7,16 @@
 // -----------------------------------------------------------------------------
 
 
-import { Stack } from "expo-router";
-import { StatusBar } from "react-native";
+import { Tabs } from "expo-router";
+
 
 export default function RootLayout() {
 
   return (
-    <Stack screenOptions={{headerShown:false}}>
+    <Tabs screenOptions={{headerShown:false}}>
       
-      <StatusBar barStyle="dark-content" />
-    </Stack>
+  
+    </Tabs>
   
 );
 }

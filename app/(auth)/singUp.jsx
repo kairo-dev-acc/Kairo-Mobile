@@ -1,210 +1,177 @@
-import React, { useRef, useState, useEffect } from 'react';
+// -----------------------------------------------------------------------------
+// Copyright (c) 2025 Kairo. All rights reserved.
+//
+// This file is part of the Kairo React Native mobile application.
+// Unauthorized copying, modification, or distribution of this file,
+// in whole or in part, is strictly prohibited without written permission.
+// -----------------------------------------------------------------------------
+
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { Link } from "expo-router";
+import { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Animated,
+  ScrollView,
   StyleSheet,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import GoogleIcon from "../../assets/images/google.svg";
+import Kairologo from "../../assets/images/Kairo-Logo.svg";
+import Button from "../../components/button.jsx";
+import Input from "../../components/InPut.jsx";
+// import {COLOR} from "../../constants/color.js"
 
-const RegistrationFlow = () => {
-  const [step, setStep] = useState(0);
-  const progress = useRef(new Animated.Value(0)).current;
+export default function Signup() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
-  const screens = [
-    'Verify your Email',
-    "What's your phone number?",
-    'Verify your phone number',
-    "What's your Name?",
-    "What's your Location?",
-    "You're all set 🎉",
-  ];
-
-  // Animate progress bar on step change
-  useEffect(() => {
-    Animated.timing(progress, {
-      toValue: (step + 1) / screens.length,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
-  }, [step]);
-
-  const handleContinue = () => {
-    if (step < screens.length - 1) {
-      setStep(step + 1);
-    }
+  const handleChange = (text) => {
+    setError("");
+    setEmail(text);
   };
 
-  const progressWidth = progress.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0%', '100%'],
-  });
-
-  // --- Each Step UI ---
-  const renderScreen = () => {
-    switch (step) {
-      case 0:
-        return (
-          <>
-            <Text style={styles.title}>Verify your Email</Text>
-            <Text style={styles.subtitle}>A code was sent to your phone number. Please enter the code below.</Text>
-            <View style={styles.codeContainer}>
-              {['3', '5', '6', '7', '7', '2'].map((num, i) => (
-                <View key={i} style={styles.codeBox}><Text>{num}</Text></View>
-              ))}
-            </View>
-          </>
-        );
-
-      case 1:
-        return (
-          <>
-            <Text style={styles.title}>What's your phone number?</Text>
-            <Text style={styles.subtitle}>We'll text you a verification code. Message and data rates may apply.</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="+234 123 456 7890"
-              keyboardType="phone-pad"
-            />
-          </>
-        );
-
-      case 2:
-        return (
-          <>
-            <Text style={styles.title}>Verify your phone number</Text>
-            <Text style={styles.subtitle}>Enter the code below.</Text>
-            <View style={styles.codeContainer}>
-              {['3', '5', '6', '7', '7', '2'].map((num, i) => (
-                <View key={i} style={styles.codeBox}><Text>{num}</Text></View>
-              ))}
-            </View>
-          </>
-        );
-
-      case 3:
-        return (
-          <>
-            <Text style={styles.title}>What's your Name?</Text>
-            <TextInput style={styles.input} placeholder="First name" />
-            <TextInput style={styles.input} placeholder="Middle name (optional)" />
-            <TextInput style={styles.input} placeholder="Last name" />
-          </>
-        );
-
-      case 4:
-        return (
-          <>
-            <Text style={styles.title}>What's your Location?</Text>
-            <Text style={styles.subtitle}>Enable location to access nearby services and sellers.</Text>
-          </>
-        );
-
-      case 5:
-        return (
-          <>
-            <Text style={styles.title}>You're all set 🎉</Text>
-            <Text style={styles.subtitle}>Welcome aboard!</Text>
-          </>
-        );
+  const handleContinue = () => {
+    if (!email.includes("@")) {
+      setError("Please enter a valid email address");
+      return;
     }
+    console.log("Continue with email:", email);
+  };
+  const handleAppleSignup = () => {
+    console.log("Continue with email:", email);
+  };
+  const handleGoogleSignup = () => {
+    console.log("Continue with email:", email);
+  };
+  const handleFacebookSignup = () => {
+    console.log("Continue with email:", email);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Progress Bar */}
-      <View style={styles.progressContainer}>
-        <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
-      </View>
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <View style={styles.inner}>
+          <Link asChild href="/(auth)">
+            <TouchableOpacity style={styles.backIcon}>
+              <Feather name="arrow-left" size={24} color="black" />
+            </TouchableOpacity>
+          </Link>
 
-      {/* Content */}
-      <View style={styles.content}>
-        {renderScreen()}
-      </View>
+          {/* Logo */}
 
-      {/* Continue Button */}
-      {step < screens.length - 1 && (
-        <TouchableOpacity style={styles.button} onPress={handleContinue}>
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      )}
+          <View style={styles.logoContainer}>
+            <Link asChild  href="/(auth)/VerifySingUp">
+            <Kairologo width={99} height={138} />
+            </Link>
+          </View>
+
+          {/* Email input section */}
+          <View style={styles.emailSection}>
+            <Text style={styles.title}>Get started with your email</Text>
+            <View style={{ marginBottom: 24 }}>
+              <Input
+                value={email}
+                onChange={handleChange}
+                placeholder="Enter email address"
+                error={error}
+              />
+            </View>
+            <Button
+              textName="Continue"
+              TextColor="#fff"
+              backgroundColor="#156F70"
+              onPressfunction={handleContinue}
+            />
+
+            {/* Divider */}
+            <View style={styles.dividerContainer}>
+              <View style={styles.line} />
+              <Text style={styles.orText}>or</Text>
+              <View style={styles.line} />
+            </View>
+          </View>
+
+          {/* Social buttons */}
+          <View style={styles.socialContainer}>
+            
+            <Button
+              textName="Continue with Apple"
+              TextColor="#156F70"
+              backgroundColor="#CFF8F3"
+              onPressfunction={handleAppleSignup}
+              icon={<AntDesign name="apple" size={15} color="black" />}
+              />
+              
+            <Button
+              textName="Continue with Google"
+              TextColor="#156F70"
+              backgroundColor="#CFF8F3"
+              onPressfunction={handleGoogleSignup}
+              iconSvg={<GoogleIcon width={14} height={15} />}
+            />
+
+            <Button
+              textName=" Continue with Facebook"
+              TextColor="#156F70"
+              backgroundColor="#CFF8F3"
+              onPressfunction={handleFacebookSignup}
+              icon={<FontAwesome5 name="facebook" size={15} color="#1877F2" />}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
-// --- STYLES ---
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 24,
-    justifyContent: 'space-between',
+    backgroundColor: "#fff",
   },
-  progressContainer: {
-    height: 4,
-    width: '100%',
-    backgroundColor: '#e0e0e0',
-    borderRadius: 2,
-    overflow: 'hidden',
-    marginTop: 10,
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#00796b',
-    borderRadius: 2,
-  },
-  content: {
+  inner: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "space-between",
+  },
+  backIcon: {
+    marginHorizontal: 23,
+    paddingTop: 30,
+    paddingBottom: 39,
+  },
+  logoContainer: {
+    alignItems: "center",
+  },
+  emailSection: {
+    marginTop: 76,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '700',
-    marginBottom: 10,
+    fontSize: 20.74,
+    fontWeight: "bold",
+    marginBottom: 24,
+    textAlign: "center",
   },
-  subtitle: {
+  dividerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 27,
+    marginHorizontal: 27,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#ddd",
+  },
+  orText: {
+    marginHorizontal: 12,
+    color: "#888",
     fontSize: 14,
-    color: '#555',
-    textAlign: 'center',
-    marginBottom: 20,
   },
-  codeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 30,
-  },
-  codeBox: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 5,
-  },
-  input: {
-    width: '100%',
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    marginVertical: 8,
-  },
-  button: {
-    backgroundColor: '#00796b',
-    borderRadius: 25,
-    paddingVertical: 14,
-    marginBottom: 30,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 16,
+  socialContainer: {
+    marginBottom: 60,
+    gap: 20,
   },
 });
-
-export default RegistrationFlow;

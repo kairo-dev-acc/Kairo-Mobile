@@ -81,7 +81,7 @@ export default function WelcomeScreen({ navigation }) {
           </TouchableOpacity>
           </Link>
 
-          <Link asChild href="(auth)/singIn">
+          <Link asChild href="/(auth)/singIn">
           <TouchableOpacity
             style={styles.signInButton}
             activeOpacity={0.9}
