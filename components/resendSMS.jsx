@@ -8,9 +8,8 @@
 
 import { Link } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-// import { COLOR } from "../constants/color.js";
 
-export default function button({ textName, TextColor, backgroundColor, onPressfunction, icon, iconSvg }) {
+export default function resendSMS({ textName, TextColor, backgroundColor, onPressfunction, icon, iconSvg }) {
   return (
       
         <TouchableOpacity
@@ -30,13 +29,14 @@ export default function button({ textName, TextColor, backgroundColor, onPressfu
 
 const styles = StyleSheet.create({
   button: {
-    padding: 15,
     borderRadius: 40,
     alignItems: "center",
+    alignItems: "stretch",
+    gap: 10,
     justifyContent: "center",
-    flexDirection: "row",
-    paddingVertical: 16,
-    marginHorizontal: 27,
+    width:154,
+    height:44,
+    marginVertical: 12,
   },
   text: {
     fontSize: 17.28,

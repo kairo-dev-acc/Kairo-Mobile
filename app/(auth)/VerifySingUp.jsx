@@ -6,30 +6,27 @@
 // in whole or in part, is strictly prohibited without written permission.
 // -----------------------------------------------------------------------------
 
-
-
-
 import Feather from "@expo/vector-icons/Feather";
 import { Link } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {
   Animated,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image,
   Platform
-
 } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; // For the Face ID icon
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../../components/button.jsx";
 import Input from "../../components/InPut.jsx";
+import Labelinput from "../../components/Labelinput.jsx";
+import ResendSMS from "../../components/resendSMS.jsx";
+import FaceId from "../../assets/images/ios-Face-ID.svg"
 
 const RegistrationFlow = () => {
   const [step, setStep] = useState(0);
+  const [PlafFrom, setPlafFrom] = useState(false);
   const [FirstName, setFirstName] = useState("");
   const [MiddleName, setMiddleName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -39,13 +36,13 @@ const RegistrationFlow = () => {
   const [phoneError, setphoneError] = useState("");
   const progress = useRef(new Animated.Value(0)).current;
 
-   const screens = [
-    'Verify your Email',
+  const screens = [
+    "Verify your Email",
     "What's your phone number?",
-    'Verify your phone number',
+    "Verify your phone number",
     "What's your Name?",
     "What's your Location?",
-    'Secure your details',
+    "Secure your details",
     "You're all set 🎉",
   ];
   // Animate progress bar on step change
@@ -120,22 +117,30 @@ const RegistrationFlow = () => {
       case 0:
         return (
           <>
-            <Link asChild href="(auth)/singUp">
+            <Link asChild href="(auth)/singup">
               <TouchableOpacity style={styles.backIcon}>
                 <Feather name="arrow-left" size={24} color="black" />
               </TouchableOpacity>
             </Link>
 
-            <Text style={styles.title}>Verify your Email</Text>
-            <Text style={styles.subtitle}>
-              A code was sent to your phone number. Please enter the code below.
-            </Text>
-            <View style={styles.codeContainer}>
-              {["-", "-", "-", "-", "-", "-"].map((num, i) => (
-                <View key={i} style={styles.codeBox}>
-                  <Text>{num}</Text>
-                </View>
-              ))}
+            <View style={styles.view}>
+              <Text style={styles.title}>Verify your Email</Text>
+              <Text style={styles.subtitle}>
+                A code was sent to your email. Please enter the code below to
+                continue
+              </Text>
+              <View style={styles.codeContainer}>
+                {["-", "-", "-", "-", "-", "-"].map((num, i) => (
+                  <View key={i} style={styles.codeBox}>
+                    <Text>{num}</Text>
+                  </View>
+                ))}
+              </View>
+
+              <Text style={styles.subtitletwo}>Didn’t receive the code?</Text>
+              <Text style={styles.subtitletwo}>
+                go back, check your email and try agan
+              </Text>
             </View>
 
             <View style={styles.buttonBox}>
@@ -152,18 +157,24 @@ const RegistrationFlow = () => {
       case 1:
         return (
           <>
-            <Text style={styles.title}>What's your phone number?</Text>
-            <Text style={styles.subtitle}>
-              We'll text you a verification code. Message and data rates may
-              apply.
-            </Text>
-            <Input
-              value={phone}
-              onChange={handleChangePhone}
-              placeholder="+234 123 456 7890"
-              error={phoneError}
-              keyboardType="phone-pad"
-            />
+            <View style={styles.viewTwo}>
+              <Text style={styles.title_}>What's your phone number?</Text>
+              <View style={styles.phonesub}>
+                <Text style={styles.subtitle_}>
+                  We use your mobile number to identify your account.
+                </Text>
+                <Text style={styles.subtitle_}>
+                  we’ll send a verification code to your number.
+                </Text>
+              </View>
+              <Input
+                value={phone}
+                onChange={handleChangePhone}
+                placeholder="+234 123 456 7890"
+                error={phoneError}
+                // keyboardType="phone-pad"
+              />
+            </View>
 
             <View style={styles.buttonBox}>
               <Button
@@ -183,14 +194,24 @@ const RegistrationFlow = () => {
               <Feather name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
 
-            <Text style={styles.title}>Verify your phone number</Text>
-            <Text style={styles.subtitle}>Enter the code below.</Text>
-            <View style={styles.codeContainer}>
-              {["-", "-", "-", "-", "-", "-"].map((num, i) => (
-                <View key={i} style={styles.codeBox}>
-                  <Text>{num}</Text>
-                </View>
-              ))}
+            <View style={styles.view}>
+              <Text style={styles.title}>Verify your phone number</Text>
+              <Text style={styles.subtitle}>Enter the code below.</Text>
+              <View style={styles.codeContainer}>
+                {["-", "-", "-", "-", "-", "-"].map((num, i) => (
+                  <View key={i} style={styles.codeBox}>
+                    <Text>{num}</Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={styles.subtitle_two} >Didn’t receive the code?</Text>
+              <ResendSMS
+                textName="Resend SMS"
+                TextColor="#156F70"
+                backgroundColor="#CFF8F3"
+                onPressfunction={handleContinue}
+                />
+                <Text style={styles.subtitle} >Try again in 0:24 seconds.</Text>
             </View>
 
             <View style={styles.buttonBox}>
@@ -207,24 +228,30 @@ const RegistrationFlow = () => {
       case 3:
         return (
           <>
-            <Text style={styles.title}>What's your Name?</Text>
-            <Input
-              value={FirstName}
-              onChange={handleChangeFirstName}
-              placeholder="First name"
-              error={FirstNameError}
-            />
-            <Input
-              value={MiddleName}
-              onChange={handleChangeMiddleName}
-              placeholder="Middle name (optional)"
-            />
-            <Input
-              value={LastName}
-              onChange={handleChangeLastName}
-              placeholder="Last name"
-              error={LastNameError}
-            />
+            <View style={styles.viewTwo}>
+              <Text style={styles.title_}>What’s your Name?</Text>
+              <Text style={styles.subtitle_}>You’re almost done</Text>
+              <Labelinput
+                value={FirstName}
+                onChange={handleChangeFirstName}
+                placeholder="First name"
+                error={FirstNameError}
+                LabelName="name"
+              />
+              <Labelinput
+                value={MiddleName}
+                onChange={handleChangeMiddleName}
+                placeholder="optional"
+                LabelName="Middle name"
+              />
+              <Labelinput
+                value={LastName}
+                onChange={handleChangeLastName}
+                placeholder="Last name"
+                error={LastNameError}
+                LabelName="Last name"
+              />
+            </View>
             <View style={styles.buttonBox}>
               <Button
                 textName="Continue"
@@ -243,10 +270,12 @@ const RegistrationFlow = () => {
               <Feather name="arrow-left" size={24} color="black" />
             </TouchableOpacity>
 
-            <Text style={styles.title}>What's your Location?</Text>
-            <Text style={styles.subtitle}>
-              Enable location to access nearby services and sellers.
-            </Text>
+            <View style={styles.view}>
+              <Text style={styles.title}>What's your Location?</Text>
+              <Text style={styles.subtitle}>
+                Enable location to access services, sellers and businesses in your area
+              </Text>
+            </View>
 
             <View style={styles.buttonBox}>
               <Button
@@ -261,37 +290,48 @@ const RegistrationFlow = () => {
 
       case 5:
         return (
-          <>  
-              {/* Face ID Icon + Text */}
+          <>
+            {/* Face ID Icon + Text */}
+            <View style={styles.view}>
               <View style={styles.faceIDContainer}>
-            
-            <Text style={styles.title}>Secure your details</Text>
-            <Text style={styles.subtitle}>Turn on Face ID to secure your Kairo app</Text>
+                <View style={styles.FaceId}>
+                  <FaceId/>
+                </View>
+                <View style={{flex: 1}}>
 
-            <View style={{ width: '100%', marginTop: 60 }}>
-               <Button
-                textName="Enable Face ID"
-                TextColor="#fff"
-                backgroundColor="#156F70"
-                onPressfunction={handleContinue}
-              />
-                <Button
-                textName="Skip, I’ll do that later"
-                TextColor="#fff"
-                backgroundColor="#115b5cff"
-                onPressfunction={handleContinue}
-              />
+                <Text style={styles.title}>Secure your details</Text>
+                <Text style={styles.subtitle}>
+                  Turn on Face ID to secure your Kairo app
+                </Text>
+
+                </View>
+                <View style={{ width: "100%", flex: 0.5 , gap: 12}}>
+                  <Button
+                    textName="Enable Face ID"
+                    TextColor="#fff"
+                    backgroundColor="#156F70"
+                    onPressfunction={handleContinue}
+                  />
+                  <Button
+                    textName="Skip, I’ll do that later"
+                    TextColor="#156F70"
+                    backgroundColor="#CFF8F3"
+                    onPressfunction={handleContinue}
+                  />
+                </View>
+              </View>
             </View>
-          </View>
           </>
         );
       case 6:
         return (
           <>
-            <Link asChild href="/(tabs)">
-              <Text style={styles.title}>You’re all set</Text>
-            </Link>
-            <Text style={styles.subtitle}>Welcome aboard!</Text>
+            <View style={styles.viewTwo}>
+              <Link asChild href="/(tabs)">
+                <Text style={styles.title_}>You’re all set</Text>
+              </Link>
+              <Text style={styles.subtitle_}>Welcome aboard!</Text>
+            </View>
 
             <View style={styles.buttonBox}>
               <Button
@@ -332,6 +372,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginTop: 10,
   },
+  view: {
+    flex: 2,
+    paddingHorizontal: 28,
+  },
+  viewTwo: {
+    justifyContent: "center",
+    flex: 2,
+  },
   progressBar: {
     height: "100%",
     backgroundColor: "#00796b",
@@ -343,41 +391,83 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     marginHorizontal: 23,
+    paddingTop: 30,
+    paddingBottom: 39,
+    flex: 1,
   },
   title: {
-    fontSize: 27,
-    fontWeight: "700",
-    paddingLeft: 20,
+    fontSize: 20.74,
+    fontWeight: "600",
+    paddingBottom: 20,
+    textAlign: "left",
+  },
+  title_: {
+    fontSize: 20.74,
+    fontWeight: "600",
+    paddingBottom: 20,
+    paddingLeft: 28,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
+    fontWeight: "400",
     color: "#555",
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: 20,
+    alignItems: "flex-end",
+  },
+  subtitle_two: {
+    fontSize: 12,
+    fontWeight: "400",
+    color: "#555",
+    textAlign: "left",
+    alignItems: "flex-end",
+  },
+  subtitle_: {
+    paddingLeft: 28,
+    fontSize: 12,
+    fontWeight: "400",
+    color: "#555",
+    alignItems: "flex-end",
+  },
+  phonesub: {
+    marginBottom: 20,
+  },
+  subtitletwo: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#555",
+    textAlign: "left",
+    marginBottom: 12,
+    alignItems: "flex-end",
   },
   codeContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 30,
   },
   codeBox: {
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    width: 40,
-    height: 40,
+    width: 49,
+    height: 49,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 5,
+    marginBottom: 32,
   },
   buttonBox: {
-    marginTop: 200,
-    marginBottom: 1,
+    marginBottom: 15,
+    flex: 0.5,
   },
   faceIDContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  FaceId: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -9,12 +9,13 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-export default function Input({
+export default function Labelinput({
   value: propValue = "",
   onChange,
   placeholder,
   error,
-  keyboardType
+  keyboardType,
+  LabelName,
 }) {
   const [text, setText] = useState(propValue);
   const [isFocused, setIsFocused] = useState(false);
@@ -30,22 +31,29 @@ export default function Input({
 
   return (
     <View style={{ marginBottom: error ? 12 : 0 }}>
-      <TextInput
-        style={[
-          styles.input,
-          isFocused && styles.inputFocused,
-          text ? styles.inputActive : null,
-          error ? styles.inputError : null,
-        ]}
-        placeholder={placeholder}
-        placeholderTextColor={error ? "#D93025" : "#999"}
-        value={text}
-        onChangeText={handleChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        keyboardType ={keyboardType}
-        autoCapitalize="none"
-      />
+      <View style={styles.inputView}>
+        <Text
+          style={[
+            styles.text,
+            isFocused && styles.inputFocused,
+            text ? styles.inputActive : null,
+            error ? styles.inputError : null,
+          ]}
+        >
+          {LabelName}
+        </Text>
+        <TextInput
+          style={[styles.input]}
+          placeholder={placeholder}
+          placeholderTextColor={error ? "#D93025" : "#999"}
+          value={text}
+          onChangeText={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          keyboardType={keyboardType}
+          autoCapitalize="none"
+        />
+      </View>
 
       {error ? (
         <View style={styles.errorContainer}>
@@ -60,21 +68,20 @@ export default function Input({
 }
 
 const styles = StyleSheet.create({
+  text: {
+    color: "#999",
+    fontSize: 12,
+    fontWeight: "400",
+  },
   input: {
-    backgroundColor: "#F6F6F6",
-    height: 48,
-    paddingVertical: 16,
-    paddingHorizontal: 12,
-    borderRadius: 8,
+    color: "#999",
     fontSize: 17.28,
     fontWeight: "400",
-    marginHorizontal: 27,
-    color: "#000",
-    width: 346,
+    outlineStyle: "",
   },
   inputFocused: {
-    borderColor: "#393838ff",
-    borderWidth: 2,
+    // borderColor: "#393838ff",
+    // borderWidth: 2,
   },
   inputActive: {
     borderColor: "#393838ff",
@@ -97,5 +104,18 @@ const styles = StyleSheet.create({
   errorText: {
     color: "#D93025",
     fontSize: 14,
+  },
+  inputView: {
+    backgroundColor: "#F6F6F6",
+    height: 48,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    fontSize: 17.28,
+    fontWeight: "400",
+    marginHorizontal: 27,
+    color: "#000",
+    width: 346,
+    marginTop:20,
   },
 });

@@ -13,17 +13,18 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import {
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  StyleSheet
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import Button from "../../components/button.jsx";
 import Input from "../../components/InPut.jsx";
-// import {COLOR} from "../../constants/color.js"
+import styles from "../../assets/style/auth/singUp.js";
+import COLORS from "../../constants/Color.js"; 
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -41,37 +42,33 @@ export default function Signup() {
     }
     console.log("Continue with email:", email);
   };
-  const handleAppleSignup = () => {
-    console.log("Continue with email:", email);
-  };
-  const handleGoogleSignup = () => {
-    console.log("Continue with email:", email);
-  };
-  const handleFacebookSignup = () => {
-    console.log("Continue with email:", email);
-  };
+
+  const handleAppleSignup = () => console.log("Continue with Apple");
+  const handleGoogleSignup = () => console.log("Continue with Google");
+  const handleFacebookSignup = () => console.log("Continue with Facebook");
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.inner}>
+          {/* Back button */}
           <Link asChild href="/(auth)">
             <TouchableOpacity style={styles.backIcon}>
-              <Feather name="arrow-left" size={24} color="black" />
+              <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
             </TouchableOpacity>
           </Link>
 
           {/* Logo */}
-
           <View style={styles.logoContainer}>
-            <Link asChild  href="/(auth)/VerifySingUp">
-            <Kairologo width={99} height={138} />
+            <Link asChild href="/(auth)/verifysingup">
+              <Kairologo width={99} height={138} />
             </Link>
           </View>
 
-          {/* Email input section */}
+          {/* Email section */}
           <View style={styles.emailSection}>
             <Text style={styles.title}>Get started with your email</Text>
+
             <View style={{ marginBottom: 24 }}>
               <Input
                 value={email}
@@ -80,10 +77,11 @@ export default function Signup() {
                 error={error}
               />
             </View>
+
             <Button
               textName="Continue"
-              TextColor="#fff"
-              backgroundColor="#156F70"
+              TextColor={COLORS.primary.white}
+              backgroundColor={COLORS.Tiber[700]}
               onPressfunction={handleContinue}
             />
 
@@ -97,27 +95,26 @@ export default function Signup() {
 
           {/* Social buttons */}
           <View style={styles.socialContainer}>
-            
             <Button
               textName="Continue with Apple"
-              TextColor="#156F70"
-              backgroundColor="#CFF8F3"
+              TextColor={COLORS.Tiber[700]}
+              backgroundColor={COLORS.Tiber[100]}
               onPressfunction={handleAppleSignup}
               icon={<AntDesign name="apple" size={15} color="black" />}
-              />
-              
+            />
+
             <Button
               textName="Continue with Google"
-              TextColor="#156F70"
-              backgroundColor="#CFF8F3"
+              TextColor={COLORS.Tiber[700]}
+              backgroundColor={COLORS.Tiber[100]}
               onPressfunction={handleGoogleSignup}
               iconSvg={<GoogleIcon width={14} height={15} />}
             />
 
             <Button
-              textName=" Continue with Facebook"
-              TextColor="#156F70"
-              backgroundColor="#CFF8F3"
+              textName="Continue with Facebook"
+              TextColor={COLORS.Tiber[700]}
+              backgroundColor={COLORS.Tiber[100]}
               onPressfunction={handleFacebookSignup}
               icon={<FontAwesome5 name="facebook" size={15} color="#1877F2" />}
             />
@@ -127,51 +124,3 @@ export default function Signup() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  backIcon: {
-    marginHorizontal: 23,
-    paddingTop: 30,
-    paddingBottom: 39,
-  },
-  logoContainer: {
-    alignItems: "center",
-  },
-  emailSection: {
-    marginTop: 76,
-  },
-  title: {
-    fontSize: 20.74,
-    fontWeight: "bold",
-    marginBottom: 24,
-    textAlign: "center",
-  },
-  dividerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 27,
-    marginHorizontal: 27,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#ddd",
-  },
-  orText: {
-    marginHorizontal: 12,
-    color: "#888",
-    fontSize: 14,
-  },
-  socialContainer: {
-    marginBottom: 60,
-    gap: 20,
-  },
-});
