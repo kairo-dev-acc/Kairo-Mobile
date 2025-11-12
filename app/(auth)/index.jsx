@@ -2,40 +2,39 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 import React from "react";
 import {
-  StatusBar,
   Dimensions,
   ImageBackground,
   Platform,
-  StyleSheet,
+  StatusBar,
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
-import styles from "../../assets/style/auth/index";
 import COLORS from "../../constants/Color.js";
-
-const { height } = Dimensions.get("window");
+import styles from "../../assets/style/auth/index"; // 👈 imported here
 
 const images = [
-  require("../../assets/images/KairoAuthScreen.jpg"),
-  require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
 ];
 
 export default function WelcomeScreen() {
+  const { height, width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
-  const PHOTO_HEIGHT = Math.round(height * 0.88);
+  const PHOTO_HEIGHT = height * (height > 700 ? 0.85 : 0.8);
+  const CARD_RADIUS = 28;
 
   return (
     <View style={styles.container}>
-      <StatusBar animated />
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" animated />
+
       {/* IMAGE SLIDER */}
-      <View style={{ flex: 0.7 }}>
+      <View style={{ height: PHOTO_HEIGHT }}>
         <SwiperFlatList
           autoplay
           autoplayDelay={4}
@@ -48,40 +47,44 @@ export default function WelcomeScreen() {
             <ImageBackground
               key={index}
               source={img}
-              style={[styles.imageBackground, { height: PHOTO_HEIGHT }]}
+              style={styles.imageBackground}
               resizeMode="cover"
             >
               <LinearGradient
-                colors={["rgba(0,0,0,0.25)", "rgba(0,0,0,0.45)"]}
-                style={{ ...StyleSheet.absoluteFillObject }}
+                colors={["rgba(0,0,0,0.15)", "rgba(0,0,0,0.55)"]}
+                style={styles.gradientOverlay}
               />
             </ImageBackground>
           ))}
         </SwiperFlatList>
       </View>
 
-      {/* OVERLAY HEADLINE */}
-      <View style={styles.headlineWrap} pointerEvents="none">
-        <Kairologo width={99} height={138} />
-        <Text style={styles.headlineTop}>Get it</Text>
-        <Text style={styles.headlineBottom}>Done!</Text>
+      {/* HEADLINE OVERLAY */}
+      <View style={[styles.headlineWrap, { top: PHOTO_HEIGHT * 0.58 }]}>
+        <Kairologo width={90} height={120} />
+        <Text style={[styles.headlineTop, { fontSize: width * 0.11 }]}>Get it</Text>
+        <Text style={[styles.headlineBottom, { fontSize: width * 0.12 }]}>Done!</Text>
       </View>
 
       {/* WHITE BOTTOM CARD */}
       <View
         style={[
           styles.bottomCard,
-          { paddingBottom: insets.bottom + (Platform.OS === "ios" ? 20 : 16) },
+          {
+            borderTopLeftRadius: CARD_RADIUS,
+            borderTopRightRadius: CARD_RADIUS,
+            paddingBottom: insets.bottom + (Platform.OS === "ios" ? 22 : 16),
+          },
         ]}
       >
         <View style={styles.buttonWrapper}>
-          <Link href="/(auth)/signup" asChild>
+          <Link href="/(auth)/signup" asChild push>
             <TouchableOpacity style={styles.signUpButton} activeOpacity={0.9}>
               <Text style={styles.signUpText}>Sign up</Text>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(auth)/signin" asChild>
+          <Link href="/(auth)/signin" asChild push>
             <TouchableOpacity style={styles.signInButton} activeOpacity={0.9}>
               <Text style={styles.signInText}>Sign in</Text>
             </TouchableOpacity>

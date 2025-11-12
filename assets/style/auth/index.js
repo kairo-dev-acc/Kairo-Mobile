@@ -1,121 +1,86 @@
-import { StyleSheet, Dimensions, Platform } from "react-native";
-import COLORS from "../../../constants/Color.js";
+import { Dimensions, StyleSheet } from "react-native";
+import COLORS from "../../../constants/Color";
 
-const { width, height } = Dimensions.get("window");
-const CARD_RADIUS = 28;
+const { width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.shark[950],
+    backgroundColor: "#000",
   },
-
   imageBackground: {
-    width,
-    justifyContent: "flex-end",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: width,
   },
-
+  gradientOverlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
   headlineWrap: {
     position: "absolute",
-    top: Math.round(height * 0.28) - 20,
-    left: 0,
-    right: 0,
+    alignSelf: "center",
     alignItems: "center",
   },
-
-  pin: {
-    fontSize: 64,
-    marginBottom: 6,
-    color: COLORS.emerald[500],
-    textShadowColor: "rgba(0,0,0,0.4)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
-  },
-
   headlineTop: {
-    fontSize: 64,
-    color: COLORS.primary.white,
-    fontWeight: "800",
-    textAlign: "center",
-    lineHeight: 50,
+    color: "#FFF",
+    fontWeight: "700",
+    marginTop: 8,
   },
-
   headlineBottom: {
-    fontSize: 64,
     color: COLORS.emerald[500],
     fontWeight: "900",
-    textAlign: "center",
-    lineHeight: 56,
+    marginBottom: 25,
   },
-
   bottomCard: {
+    backgroundColor: "#FFF",
     position: "absolute",
+    bottom: 0,
     left: 0,
     right: 0,
-    bottom: 0,
-    backgroundColor: COLORS.primary.white,
-    borderTopLeftRadius: CARD_RADIUS,
-    borderTopRightRadius: CARD_RADIUS,
+    paddingTop: 28,
     paddingHorizontal: 24,
-    paddingTop: 20,
-    ...Platform.select({
-      ios: {
-        shadowColor: COLORS.shark[900],
-        shadowOffset: { width: 0, height: -4 },
-        shadowOpacity: 0.08,
-        shadowRadius: 10,
-      },
-      android: {
-        elevation: 8,
-      },
-    }),
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 6,
   },
-
   buttonWrapper: {
-    width: "100%",
-    alignItems: "center",
+    gap: 14,
+    marginBottom: 18,
   },
-
   signUpButton: {
-    backgroundColor: COLORS.emerald[600],
-    width: "90%",
-    borderRadius: 30,
-    paddingVertical: 16,
-    alignItems: "center",
-    marginBottom: 14,
-  },
-  signUpText: {
-    color: COLORS.primary.white,
-    fontSize: 18,
-    fontWeight: "700",
-  },
-
-  signInButton: {
-    width: "90%",
-    borderRadius: 30,
+    backgroundColor: COLORS.emerald[500],
+    borderRadius: 50,
     paddingVertical: 14,
     alignItems: "center",
+  },
+  signUpText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  signInButton: {
+    borderColor: COLORS.emerald[500],
     borderWidth: 1.5,
-    borderColor: COLORS.emerald[600],
-    backgroundColor: "transparent",
+    borderRadius: 50,
+    paddingVertical: 14,
+    alignItems: "center",
   },
   signInText: {
-    color: COLORS.emerald[600],
-    fontSize: 17,
-    fontWeight: "700",
+    color: COLORS.emerald[500],
+    fontSize: 16,
+    fontWeight: "600",
   },
-
   privacyText: {
-    color: COLORS.shark[400],
-    fontSize: 12,
     textAlign: "center",
-    marginTop: 12,
+    color: "#666",
+    fontSize: 13,
+    lineHeight: 18,
   },
   linkText: {
-    color: COLORS.shark[950],
-    fontWeight: "700",
-    textDecorationLine: "underline",
+    color: "#000",
+    fontWeight: "600",
   },
 });
-
-export default styles;

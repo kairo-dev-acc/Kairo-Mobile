@@ -9,26 +9,22 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
+import styles from "../../assets/style/auth/singUp.js";
 import Button from "../../components/button.jsx";
 import Input from "../../components/InPut.jsx";
-import styles from "../../assets/style/auth/singUp.js";
-import COLORS from "../../constants/Color.js"; 
+import COLORS from "../../constants/Color.js";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleChange = (text) => {
     setError("");
@@ -40,6 +36,7 @@ export default function Signup() {
       setError("Please enter a valid email address");
       return;
     }
+    router.push("/(auth)/verifysingup");
     console.log("Continue with email:", email);
   };
 
@@ -49,10 +46,16 @@ export default function Signup() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+          barStyle="dark-content"
+          translucent
+          backgroundColor="transparent"
+          animated
+        />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.inner}>
           {/* Back button */}
-          <Link asChild href="/(auth)">
+          <Link asChild href="/(auth)" dismissTo>
             <TouchableOpacity style={styles.backIcon}>
               <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
             </TouchableOpacity>
@@ -60,9 +63,7 @@ export default function Signup() {
 
           {/* Logo */}
           <View style={styles.logoContainer}>
-            <Link asChild href="/(auth)/verifysingup">
               <Kairologo width={99} height={138} />
-            </Link>
           </View>
 
           {/* Email section */}

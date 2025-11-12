@@ -1,14 +1,7 @@
-// -----------------------------------------------------------------------------
-// Copyright (c) 2025 Kairo. All rights reserved.
-//
-// This file is part of the Kairo React Native mobile application.
-// Unauthorized copying, modification, or distribution of this file,
-// in whole or in part, is strictly prohibited without written permission.
-// -----------------------------------------------------------------------------
-
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View, Animated } from "react-native";
+
 export default function Labelinput({
   value: propValue = "",
   onChange,
@@ -19,37 +12,79 @@ export default function Labelinput({
 }) {
   const [text, setText] = useState(propValue);
   const [isFocused, setIsFocused] = useState(false);
+  const labelPosition = new Animated.Value(propValue ? 1 : 0);
 
   useEffect(() => {
     setText(propValue);
+    Animated.timing(labelPosition, {
+      toValue: propValue ? 1 : 0,
+      duration: 150,
+      useNativeDriver: false,
+    }).start();
   }, [propValue]);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    Animated.timing(labelPosition, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    if (!text) {
+      Animated.timing(labelPosition, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: false,
+      }).start();
+    }
+  };
 
   const handleChange = (newText) => {
     setText(newText);
     onChange?.(newText);
   };
 
+  const labelStyle = {
+    position: "absolute",
+    left: 16,
+    top: labelPosition.interpolate({
+      inputRange: [0, 1],
+      outputRange: [18, 6],
+    }),
+    fontSize: labelPosition.interpolate({
+      inputRange: [0, 1],
+      outputRange: [12, 10],
+    }),
+    color: error
+      ? "#D93025"
+      : isFocused
+      ? "#474747ff"
+      : "#777",
+  };
+
   return (
-    <View style={{ marginBottom: error ? 12 : 0 }}>
-      <View style={styles.inputView}>
-        <Text
-          style={[
-            styles.text,
-            isFocused && styles.inputFocused,
-            text ? styles.inputActive : null,
-            error ? styles.inputError : null,
-          ]}
-        >
-          {LabelName}
-        </Text>
+    <View style={{ marginBottom: error ? 28 : 20 }}>
+      <View
+        style={[
+          styles.inputContainer,
+          isFocused && styles.inputFocused,
+          error && styles.inputError,
+        ]}
+      >
+        <Animated.Text style={labelStyle}>{LabelName}</Animated.Text>
+
         <TextInput
-          style={[styles.input]}
-          placeholder={placeholder}
-          placeholderTextColor={error ? "#D93025" : "#999"}
+          style={styles.input}
           value={text}
           onChangeText={handleChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          placeholder={isFocused ? "" : placeholder}
+          placeholderTextColor="#aaa"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           keyboardType={keyboardType}
           autoCapitalize="none"
         />
@@ -57,9 +92,7 @@ export default function Labelinput({
 
       {error ? (
         <View style={styles.errorContainer}>
-          <Text style={styles.errorIcon}>
-            <MaterialIcons name="error" size={16} color="#D93025" />
-          </Text>
+          <MaterialIcons name="error" size={16} color="#D93025" />
           <Text style={styles.errorText}>{error}</Text>
         </View>
       ) : null}
@@ -68,23 +101,26 @@ export default function Labelinput({
 }
 
 const styles = StyleSheet.create({
-  text: {
-    color: "#999",
-    fontSize: 12,
-    fontWeight: "400",
+  inputContainer: {
+    position: "relative",
+    backgroundColor: "#FAFAFA",
+    borderRadius: 8,
+    borderWidth: 1.5,
+    borderColor: "#E0E0E0",
+    height: 64,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    marginHorizontal: 27,
   },
   input: {
-    color: "#999",
     fontSize: 17.28,
-    fontWeight: "400",
-    outlineStyle: "",
+    color: "#222",
+    paddingTop: 18,
+    paddingBottom: 6,
   },
   inputFocused: {
-    // borderColor: "#393838ff",
-    // borderWidth: 2,
-  },
-  inputActive: {
-    borderColor: "#393838ff",
+    borderColor: "#4b484fff",
+    backgroundColor: "#F8F3FF",
   },
   inputError: {
     borderColor: "#D93025",
@@ -93,29 +129,12 @@ const styles = StyleSheet.create({
   errorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 6,
     marginHorizontal: 27,
-  },
-  errorIcon: {
-    color: "#D93025",
-    marginRight: 6,
-    fontSize: 14,
   },
   errorText: {
     color: "#D93025",
     fontSize: 14,
-  },
-  inputView: {
-    backgroundColor: "#F6F6F6",
-    height: 48,
-    paddingVertical: 16,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    fontSize: 17.28,
-    fontWeight: "400",
-    marginHorizontal: 27,
-    color: "#000",
-    width: 346,
-    marginTop:20,
+    marginLeft: 4,
   },
 });

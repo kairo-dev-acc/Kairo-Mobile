@@ -7,7 +7,7 @@
 // -----------------------------------------------------------------------------
 
 import Feather from "@expo/vector-icons/Feather";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -15,18 +15,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Platform
+  StatusBar        
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import FaceId from "../../assets/images/ios-Face-ID.svg";
 import Button from "../../components/button.jsx";
 import Input from "../../components/InPut.jsx";
 import Labelinput from "../../components/Labelinput.jsx";
 import ResendSMS from "../../components/resendSMS.jsx";
-import FaceId from "../../assets/images/ios-Face-ID.svg"
 
 const RegistrationFlow = () => {
   const [step, setStep] = useState(0);
-  const [PlafFrom, setPlafFrom] = useState(false);
   const [FirstName, setFirstName] = useState("");
   const [MiddleName, setMiddleName] = useState("");
   const [LastName, setLastName] = useState("");
@@ -35,6 +34,8 @@ const RegistrationFlow = () => {
   const [LastNameError, setLastNameError] = useState("");
   const [phoneError, setphoneError] = useState("");
   const progress = useRef(new Animated.Value(0)).current;
+
+  const Router = useRouter();
 
   const screens = [
     "Verify your Email",
@@ -117,7 +118,7 @@ const RegistrationFlow = () => {
       case 0:
         return (
           <>
-            <Link asChild href="(auth)/singup">
+            <Link asChild href="/(auth)/signup" dismissTo>
               <TouchableOpacity style={styles.backIcon}>
                 <Feather name="arrow-left" size={24} color="black" />
               </TouchableOpacity>
@@ -204,14 +205,14 @@ const RegistrationFlow = () => {
                   </View>
                 ))}
               </View>
-              <Text style={styles.subtitle_two} >Didn’t receive the code?</Text>
+              <Text style={styles.subtitle_two}>Didn’t receive the code?</Text>
               <ResendSMS
                 textName="Resend SMS"
                 TextColor="#156F70"
                 backgroundColor="#CFF8F3"
                 onPressfunction={handleContinue}
-                />
-                <Text style={styles.subtitle} >Try again in 0:24 seconds.</Text>
+              />
+              <Text style={styles.subtitle}>Try again in 0:24 seconds.</Text>
             </View>
 
             <View style={styles.buttonBox}>
@@ -273,7 +274,8 @@ const RegistrationFlow = () => {
             <View style={styles.view}>
               <Text style={styles.title}>What's your Location?</Text>
               <Text style={styles.subtitle}>
-                Enable location to access services, sellers and businesses in your area
+                Enable location to access services, sellers and businesses in
+                your area
               </Text>
             </View>
 
@@ -295,17 +297,15 @@ const RegistrationFlow = () => {
             <View style={styles.view}>
               <View style={styles.faceIDContainer}>
                 <View style={styles.FaceId}>
-                  <FaceId/>
+                  <FaceId />
                 </View>
-                <View style={{flex: 1}}>
-
-                <Text style={styles.title}>Secure your details</Text>
-                <Text style={styles.subtitle}>
-                  Turn on Face ID to secure your Kairo app
-                </Text>
-
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.title}>Secure your details</Text>
+                  <Text style={styles.subtitle}>
+                    Turn on Face ID to secure your Kairo app
+                  </Text>
                 </View>
-                <View style={{ width: "100%", flex: 0.5 , gap: 12}}>
+                <View style={{ width: "100%", flex: 0.5, gap: 12 }}>
                   <Button
                     textName="Enable Face ID"
                     TextColor="#fff"
@@ -338,6 +338,9 @@ const RegistrationFlow = () => {
                 textName="Continue"
                 TextColor="#fff"
                 backgroundColor="#156F70"
+                onPressfunction={() => {
+                  Router.push("/(tabs)");
+                }}
               />
             </View>
           </>
@@ -347,6 +350,12 @@ const RegistrationFlow = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+          barStyle="dark-content"
+          translucent
+          backgroundColor="transparent"
+          animated
+        />
       {/* Progress Bar */}
       <View style={styles.progressContainer}>
         <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
