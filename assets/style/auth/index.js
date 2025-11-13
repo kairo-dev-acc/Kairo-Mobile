@@ -83,4 +83,13 @@ export default StyleSheet.create({
     color: "#000",
     fontWeight: "600",
   },
+  bottomPrivecy: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  bottomTerms: {
+    marginTop: 4,
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });

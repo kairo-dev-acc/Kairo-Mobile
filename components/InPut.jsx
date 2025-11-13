@@ -8,7 +8,7 @@
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View, Platform } from "react-native";
 export default function Input({
   value: propValue = "",
   onChange,
@@ -62,15 +62,15 @@ export default function Input({
 const styles = StyleSheet.create({
   input: {
     backgroundColor: "#F6F6F6",
-    height: 48,
+    height: 50,
     paddingVertical: 16,
     paddingHorizontal: 12,
     borderRadius: 8,
-    fontSize: 17.28,
+    fontSize: 15,
     fontWeight: "400",
     marginHorizontal: 27,
     color: "#000",
-    width: 346,
+    // width: 346,
   },
   inputFocused: {
     borderColor: "#393838ff",

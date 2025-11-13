@@ -21,6 +21,8 @@ const images = [
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
+  require("../../assets/images/KairoAuthScreen.jpg"),
+  require("../../assets/images/KairoAuthScreen.jpg"),
 ];
 
 export default function WelcomeScreen() {
@@ -79,23 +81,29 @@ export default function WelcomeScreen() {
       >
         <View style={styles.buttonWrapper}>
           <Link href="/(auth)/signup" asChild push>
-            <TouchableOpacity style={styles.signUpButton} activeOpacity={0.9}>
+            <TouchableOpacity style={styles.signUpButton} activeOpacity={0.5}>
               <Text style={styles.signUpText}>Sign up</Text>
             </TouchableOpacity>
           </Link>
 
           <Link href="/(auth)/signin" asChild push>
-            <TouchableOpacity style={styles.signInButton} activeOpacity={0.9}>
+            <TouchableOpacity style={styles.signInButton} activeOpacity={0.5}>
               <Text style={styles.signInText}>Sign in</Text>
             </TouchableOpacity>
           </Link>
         </View>
 
+        <View style={styles.bottomPrivecy}>
+
         <Text style={styles.privacyText}>
           By continuing, you agree to Kairo’s{" "}
-          <Text style={styles.linkText}>Privacy Policy</Text> and{" "}
-          <Text style={styles.linkText}>Terms of Use</Text>.
         </Text>
+          <View style={styles.bottomTerms}>
+          <Text style={styles.linkText}>Privacy Policy</Text> <Text>{" "}and{" "}</Text> 
+          <Text style={styles.linkText}>Terms of Use</Text>.
+          </View>
+        </View>
+        
       </View>
     </View>
   );
