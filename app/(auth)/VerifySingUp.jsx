@@ -15,7 +15,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StatusBar        
+  StatusBar,
+  KeyboardAvoidingView,   
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FaceId from "../../assets/images/ios-Face-ID.svg";
@@ -173,7 +174,7 @@ const RegistrationFlow = () => {
                 onChange={handleChangePhone}
                 placeholder="+234 123 456 7890"
                 error={phoneError}
-                // keyboardType="phone-pad"
+                // keyboardType="numeric"
               />
             </View>
 
@@ -350,19 +351,22 @@ const RegistrationFlow = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <StatusBar
           barStyle="dark-content"
           translucent
           backgroundColor="transparent"
           animated
-        />
+          />
       {/* Progress Bar */}
       <View style={styles.progressContainer}>
         <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
       </View>
 
+
       {/* Content */}
       <View style={styles.content}>{renderScreen()}</View>
+
     </SafeAreaView>
   );
 };

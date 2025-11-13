@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   orText: {
     marginHorizontal: 12,
     color: COLORS.shark[400],
-    fontSize: 14,
+    fontSize: 17.28,
   },
   socialContainer: {
     marginBottom: 60,

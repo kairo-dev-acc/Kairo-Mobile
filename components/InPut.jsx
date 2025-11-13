@@ -8,13 +8,18 @@
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 export default function Input({
   value: propValue = "",
   onChange,
   placeholder,
   error,
-  keyboardType
+  keyboardType,
 }) {
   const [text, setText] = useState(propValue);
   const [isFocused, setIsFocused] = useState(false);
@@ -29,33 +34,34 @@ export default function Input({
   };
 
   return (
-    <View style={{ marginBottom: error ? 12 : 0 }}>
-      <TextInput
-        style={[
-          styles.input,
-          isFocused && styles.inputFocused,
-          text ? styles.inputActive : null,
-          error ? styles.inputError : null,
-        ]}
-        placeholder={placeholder}
-        placeholderTextColor={error ? "#D93025" : "#999"}
-        value={text}
-        onChangeText={handleChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        keyboardType ={keyboardType}
-        autoCapitalize="none"
-      />
+    
+      <View style={{ marginBottom: error ? 12 : 0 }}>
+        <TextInput
+          style={[
+            styles.input,
+            isFocused && styles.inputFocused,
+            text ? styles.inputActive : null,
+            error ? styles.inputError : null,
+          ]}
+          placeholder={placeholder}
+          placeholderTextColor={error ? "#D93025" : "#999"}
+          value={text}
+          onChangeText={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          keyboardType={keyboardType}
+          autoCapitalize="none"
+        />
 
-      {error ? (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorIcon}>
-            <MaterialIcons name="error" size={16} color="#D93025" />
-          </Text>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      ) : null}
-    </View>
+        {error ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorIcon}>
+              <MaterialIcons name="error" size={16} color="#D93025" />
+            </Text>
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        ) : null}
+      </View>
   );
 }
 

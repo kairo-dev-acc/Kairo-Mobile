@@ -11,7 +11,7 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, StatusBar } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View, StatusBar, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
@@ -46,6 +46,9 @@ export default function Signup() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView>
+
+      
       <StatusBar
           barStyle="dark-content"
           translucent
@@ -76,6 +79,7 @@ export default function Signup() {
                 onChange={handleChange}
                 placeholder="Enter email address"
                 error={error}
+                keyboardType="email-address"
               />
             </View>
 
@@ -122,6 +126,7 @@ export default function Signup() {
           </View>
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

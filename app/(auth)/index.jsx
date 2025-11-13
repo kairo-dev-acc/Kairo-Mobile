@@ -1,8 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import {
-  Dimensions,
   ImageBackground,
   Platform,
   StatusBar,
@@ -14,8 +13,8 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
-import COLORS from "../../constants/Color.js";
 import styles from "../../assets/style/auth/index"; // 👈 imported here
+import COLORS from "../../constants/Color.js";
 
 const images = [
   require("../../assets/images/KairoAuthScreen.jpg"),
@@ -28,12 +27,17 @@ const images = [
 export default function WelcomeScreen() {
   const { height, width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
-  const PHOTO_HEIGHT = height * (height > 700 ? 0.85 : 0.8);
+  const PHOTO_HEIGHT = height * (height > 700 ? 0.89 : 0.8);
   const CARD_RADIUS = 28;
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" animated />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+        animated
+      />
 
       {/* IMAGE SLIDER */}
       <View style={{ height: PHOTO_HEIGHT }}>
@@ -64,8 +68,12 @@ export default function WelcomeScreen() {
       {/* HEADLINE OVERLAY */}
       <View style={[styles.headlineWrap, { top: PHOTO_HEIGHT * 0.58 }]}>
         <Kairologo width={90} height={120} />
-        <Text style={[styles.headlineTop, { fontSize: width * 0.11 }]}>Get it</Text>
-        <Text style={[styles.headlineBottom, { fontSize: width * 0.12 }]}>Done!</Text>
+        <Text style={[styles.headlineTop, { fontSize: width * 0.11 }]}>
+          Get it
+        </Text>
+        <Text style={[styles.headlineBottom, { fontSize: width * 0.12 }]}>
+          Done!
+        </Text>
       </View>
 
       {/* WHITE BOTTOM CARD */}
@@ -94,16 +102,21 @@ export default function WelcomeScreen() {
         </View>
 
         <View style={styles.bottomPrivecy}>
-
-        <Text style={styles.privacyText}>
-          By continuing, you agree to Kairo’s{" "}
-        </Text>
+          <Text style={styles.privacyText}>
+            By continuing, you agree to Kairo’s{" "}
+          </Text>
           <View style={styles.bottomTerms}>
-          <Text style={styles.linkText}>Privacy Policy</Text> <Text>{" "}and{" "}</Text> 
-          <Text style={styles.linkText}>Terms of Use</Text>.
+            <View>
+              <Text style={styles.linkText}>Privacy Policy</Text>
+              <View style={styles.termsBox}></View>
+            </View>
+            <Text style={styles.privacyText_}>{" "}and{" "}</Text>
+            <View >
+              <Text style={styles.linkText}>Terms of Use</Text>.
+              <View style={styles.termsBox}></View>
+            </View>
           </View>
         </View>
-        
       </View>
     </View>
   );
