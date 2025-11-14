@@ -16,7 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singUp.js";
-import Button from "../../components/button.jsx";
+import Button from "../../components/button/button.jsx";
 import Input from "../../components/InPut.jsx";
 import COLORS from "../../constants/Color.js";
 

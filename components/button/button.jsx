@@ -6,25 +6,27 @@
 // in whole or in part, is strictly prohibited without written permission.
 // -----------------------------------------------------------------------------
 
-import { Link } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-// import { COLOR } from "../constants/color.js";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function button({ textName, TextColor, backgroundColor, onPressfunction, icon, iconSvg }) {
+export default function buttonDark({
+  textName,
+  TextColor,
+  backgroundColor,
+  onPressfunction,
+  icon,
+  iconSvg,
+}) {
   return (
-      
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: backgroundColor },
-          ]}
-          onPress={onPressfunction}
-        >
-          {iconSvg}
-          <Text style={[styles.text,
-            { color: TextColor }
-          ]}>{icon}{textName}</Text>
-        </TouchableOpacity>
+    <TouchableOpacity
+      style={[styles.button, { backgroundColor: backgroundColor }]}
+      onPress={onPressfunction}
+    >
+      {iconSvg}
+      <Text style={[styles.text, { color: TextColor }]}>
+        {icon}
+        {textName}
+      </Text>
+    </TouchableOpacity>
   );
 }
 
