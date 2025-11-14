@@ -19,7 +19,7 @@ import {useFonts} from "expo-font";
 import AppLoading from "expo-app-loading";
 
 const images = [
-  require("../../assets/images/KairoAuthScreen.jpg"),
+  require("../../assets//images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
   require("../../assets/images/KairoAuthScreen.jpg"),
@@ -33,8 +33,10 @@ export default function WelcomeScreen() {
   const CARD_RADIUS = 28;
 
   let [fontsLoaded] = useFonts({
-    "Poppins-Black": require("../../assets/fonts/Poppins-Black.ttf"),
-    "Poppins-BlackItalic": require("../../assets/fonts/Poppins-BlackItalic.ttf"),
+    "Poppins-Black": require("../../assets/fonts/Poppins/Poppins-Black.ttf"),
+    "Poppins-BlackItalic": require("../../assets/fonts/Poppins/Poppins-BlackItalic.ttf"),
+    "Poppins-Medium": require("../../assets/fonts/Poppins/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../../assets/fonts/Poppins/Poppins-Regular.ttf"),
   })
   
   if(!fontsLoaded){

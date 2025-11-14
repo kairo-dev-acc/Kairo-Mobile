@@ -20,6 +20,7 @@ import Button from "../../components/button.jsx";
 import Input from "../../components/InPut.jsx";
 import COLORS from "../../constants/Color.js";
 
+
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +31,8 @@ export default function Signup() {
     setError("");
     setEmail(text);
   };
+
+
 
   const handleContinue = () => {
     if (!email.includes("@")) {

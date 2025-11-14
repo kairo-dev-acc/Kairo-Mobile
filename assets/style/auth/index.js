@@ -1,9 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native";
 import COLORS from "../../../constants/Color";
-
+import FONTS from "../../../constants/fonts.js";
 
 const { width } = Dimensions.get("window");
-
 
 export default StyleSheet.create({
   container: {
@@ -60,8 +59,9 @@ export default StyleSheet.create({
   },
   signUpText: {
     color: COLORS.primary.white,
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 17.28,
+    fontWeight: "500",
+    // ...FONTS.Medium.Body[1],
   },
   signInButton: {
     borderColor: COLORS.emerald[100],
@@ -75,12 +75,14 @@ export default StyleSheet.create({
     color: COLORS.Tiber[700],
     fontSize: 16,
     fontWeight: "600",
+    fontFamily: "Poppins-Regular",
   },
   privacyText: {
     textAlign: "center",
     color: COLORS.shark[200],
     fontSize: 14.4,
     lineHeight: 18,
+    fontFamily: "Poppins-Medium",
   },
   privacyText_: {
     textAlign: "center",
@@ -89,17 +91,20 @@ export default StyleSheet.create({
     lineHeight: 18,
     fontWeight: "400",
     paddingBottom: 6,
+    fontFamily: "Poppins-Regular",
   },
   linkText: {
     fontSize: 14.4,
     color: COLORS.emerald[800],
     fontWeight: "600",
+    fontStyle: "normal",
+    fontFamily: "Poppins-Black",
   },
-  termsBox:{
+  termsBox: {
     marginTop: 8,
     width: 83,
     height: 1,
-    backgroundColor: COLORS.emerald[800]
+    backgroundColor: COLORS.emerald[800],
   },
   bottomPrivecy: {
     flexDirection: "column",

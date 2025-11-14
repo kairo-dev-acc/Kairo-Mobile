@@ -22,8 +22,9 @@ const styles = StyleSheet.create({
     marginTop: 76,
   },
   title: {
+    fontFamily: "Poppins-Black",
     fontSize: 20.74,
-    fontWeight: "bold",
+    fontWeight: "600",
     marginBottom: 24,
     textAlign: "center",
     color: COLORS.shark[950],
