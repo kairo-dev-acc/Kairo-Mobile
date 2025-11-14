@@ -13,8 +13,10 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
-import styles from "../../assets/style/auth/index"; // 👈 imported here
+import styles from "../../assets/style/auth/index"; 
 import COLORS from "../../constants/Color.js";
+import {useFonts} from "expo-font";
+import AppLoading from "expo-app-loading";
 
 const images = [
   require("../../assets/images/KairoAuthScreen.jpg"),
@@ -29,6 +31,15 @@ export default function WelcomeScreen() {
   const insets = useSafeAreaInsets();
   const PHOTO_HEIGHT = height * (height > 700 ? 0.89 : 0.8);
   const CARD_RADIUS = 28;
+
+  let [fontsLoaded] = useFonts({
+    "Poppins-Black": require("../../assets/fonts/Poppins-Black.ttf"),
+    "Poppins-BlackItalic": require("../../assets/fonts/Poppins-BlackItalic.ttf"),
+  })
+  
+  if(!fontsLoaded){
+    return<AppLoading/>
+  }
 
   return (
     <View style={styles.container}>
