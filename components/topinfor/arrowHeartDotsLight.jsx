@@ -2,7 +2,7 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import Ellipsis from "../../assets/images/ellipsis-vertical.svg";
+import Ellipsis from "../../assets/images/state=heroicons-mini, colour=ellipsis-vertical.svg";
 import COLORS from "../../constants/Color";
 
 

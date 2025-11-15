@@ -17,7 +17,7 @@ import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singUp.js";
 import Button from "../../components/button/Primary/buttonDark.jsx";
 import Input from "../../components/userInput/LabelinputIcon.jsx";
-import  ArrowAndHeart from "../../components/topinfor/arrowAndHeart.jsx"
+import  ArrowHeartDotsDark from "../../components/topinfor/arrowHeartDotsDark.jsx"
 import COLORS from "../../constants/Color.js";
 
 
@@ -62,7 +62,7 @@ export default function Signup() {
         <View style={styles.inner}>
           {/* Back button */}
 
-             <ArrowAndHeart/>
+             <ArrowHeartDotsDark/>
 
 
           {/* Logo */}

@@ -24,7 +24,6 @@ import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singIn.js";
 import Button from "../../components/button/Primary/buttonDark.jsx";
 import Input from "../../components/userInput/LabelinputIcon.jsx";
-import ArrowAndHeart from "../../components/topinfor/arrowAndHeart.jsx";
 import COLORS from "../../constants/Color.js";
 
 export default function Signin() {
