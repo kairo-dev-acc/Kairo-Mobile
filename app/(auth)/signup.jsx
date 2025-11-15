@@ -8,18 +8,24 @@
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, StatusBar, KeyboardAvoidingView } from "react-native";
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singUp.js";
 import Button from "../../components/button/Primary/buttonDark.jsx";
-import Input from "../../components/userInput/LabelinputIcon.jsx";
-import  ArrowHeartDotsDark from "../../components/topinfor/arrowHeartDotsDark.jsx"
+import ButtonDarkIcon from "../../components/button/Primary/buttonDarkIcon.jsx";
+import ArrowHeartDotsDark from "../../components/topinfor/arrowHeartDotsDark.jsx";
+import Input from "../../components/userInput/InPut.jsx";
 import COLORS from "../../constants/Color.js";
-
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -31,8 +37,6 @@ export default function Signup() {
     setError("");
     setEmail(text);
   };
-
-
 
   const handleContinue = () => {
     if (!email.includes("@")) {
@@ -50,84 +54,87 @@ export default function Signup() {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView>
-
-      
-      <StatusBar
+        <StatusBar
           barStyle="dark-content"
           translucent
           backgroundColor="transparent"
           animated
         />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.inner}>
-          {/* Back button */}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.inner}>
+            {/* Back button */}
 
-             <ArrowHeartDotsDark/>
+            <ArrowHeartDotsDark
+              arrowFunction={() => {
+                router.back("/(auth)");
+              }}
+            />
 
-
-          {/* Logo */}
-          <View style={styles.logoContainer}>
+            {/* Logo */}
+            <View style={styles.logoContainer}>
               <Kairologo width={99} height={138} />
-          </View>
+            </View>
 
-          {/* Email section */}
-          <View style={styles.emailSection}>
-            <Text style={styles.title}>Get started with your email</Text>
+            {/* Email section */}
+            <View style={styles.emailSection}>
+              <Text style={styles.title}>Get started with your email</Text>
 
-            <View style={{ marginBottom: 24 }}>
-              <Input
-              LabelName='nosa'
-                value={email}
-                onChange={handleChange}
-                placeholder="Enter email address"
-                error={error}
-                keyboardType="email-address"
+              <View style={{ marginBottom: 24 }}>
+                <Input
+                  LabelName="nosa"
+                  value={email}
+                  onChange={handleChange}
+                  placeholder="Enter email address"
+                  error={error}
+                  keyboardType="email-address"
+                />
+              </View>
+
+              <Button
+                textName="Continue"
+                TextColor={COLORS.primary.white}
+                backgroundColor={COLORS.Tiber[700]}
+                onPressfunction={handleContinue}
+              />
+
+              {/* Divider */}
+              <View style={styles.dividerContainer}>
+                <View style={styles.line} />
+                <Text style={styles.orText}>or</Text>
+                <View style={styles.line} />
+              </View>
+            </View>
+
+            {/* Social buttons */}
+            <View style={styles.socialContainer}>
+              <ButtonDarkIcon
+                textName="Continue with Apple"
+                TextColor={COLORS.Tiber[700]}
+                backgroundColor={COLORS.Tiber[100]}
+                onPressfunction={handleAppleSignup}
+                icon={<AntDesign name="apple" size={15} color="black" />}
+              />
+
+              <ButtonDarkIcon
+                textName="Continue with Google"
+                TextColor={COLORS.Tiber[700]}
+                backgroundColor={COLORS.Tiber[100]}
+                onPressfunction={handleGoogleSignup}
+                icon={<GoogleIcon width={14} height={15} />}
+              />
+
+              <ButtonDarkIcon
+                textName="Continue with Facebook"
+                TextColor={COLORS.Tiber[700]}
+                backgroundColor={COLORS.Tiber[100]}
+                onPressfunction={handleFacebookSignup}
+                icon={
+                  <FontAwesome5 name="facebook" size={15} color="#1877F2" />
+                }
               />
             </View>
-
-            <Button
-              textName="Continue"
-              TextColor={COLORS.primary.white}
-              backgroundColor={COLORS.Tiber[700]}
-              onPressfunction={handleContinue}
-            />
-
-            {/* Divider */}
-            <View style={styles.dividerContainer}>
-              <View style={styles.line} />
-              <Text style={styles.orText}>or</Text>
-              <View style={styles.line} />
-            </View>
           </View>
-
-          {/* Social buttons */}
-          <View style={styles.socialContainer}>
-            <Button
-              textName="Continue with Apple"
-              TextColor={COLORS.Tiber[700]}
-              backgroundColor={COLORS.Tiber[100]}
-              onPressfunction={handleAppleSignup}
-              icon={<AntDesign name="apple" size={15} color="black" />}
-            />
-
-            <Button
-              textName="Continue with Google"
-              TextColor={COLORS.Tiber[700]}
-              backgroundColor={COLORS.Tiber[100]}
-              onPressfunction={handleGoogleSignup}
-              iconSvg={<GoogleIcon width={14} height={15} />}
-            />
-
-            <Button
-              textName="Continue with Facebook"
-              TextColor={COLORS.Tiber[700]}
-              backgroundColor={COLORS.Tiber[100]}
-              onPressfunction={handleFacebookSignup}
-              icon={<FontAwesome5 name="facebook" size={15} color="#1877F2" />}
-            />
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

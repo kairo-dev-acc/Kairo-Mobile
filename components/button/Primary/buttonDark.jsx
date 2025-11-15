@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import COLORS from "../../../constants/Color";
 import FONTS from "../../../constants/fonts";
 import { LoaderBars } from "../../LoaderBars";
@@ -24,11 +24,9 @@ export default function ButtonDark({
       {loading ? (
         <LoaderBars />
       ) : (
-        <View>
-          <Text style={[styles.text, isDisabled && styles.textDisabled]}>
-            {textName}
-          </Text>
-        </View>
+        <Text style={[styles.text, isDisabled && styles.textDisabled]}>
+          {textName}
+        </Text>
       )}
     </Pressable>
   );
@@ -36,7 +34,8 @@ export default function ButtonDark({
 
 const styles = StyleSheet.create({
   button: {
-    padding: 20,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
     borderRadius: 40,
     width: 346,
     height: 52,
@@ -55,8 +54,10 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   text: {
-    ...FONTS.Medium.Body[1],
+    ...FONTS.Medium.Body[1], // ⬅️ Now using Medium (Option A)
     color: COLORS.primary.white,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   textDisabled: {
     color: COLORS.primary.white + "80",

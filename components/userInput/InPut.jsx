@@ -46,7 +46,7 @@ export default function Inputicon({
             error ? styles.inputError : null,
           ]}
           placeholder={placeholder}
-          placeholderTextColor={error ? COLORS.primary.thunderbird : "#999"}
+          placeholderTextColor={error ? COLORS.primary.thunderbird : COLORS.shark[300]}
           value={text}
           onChangeText={handleChange}
           onFocus={() => setIsFocused(true)}

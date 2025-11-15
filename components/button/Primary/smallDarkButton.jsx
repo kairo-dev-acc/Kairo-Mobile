@@ -1,9 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import COLORS from "../../../constants/Color";
 import FONTS from "../../../constants/fonts";
 import { LoaderBars } from "../../LoaderBars";
 
-export default function smallDarkButton({
+export default function SmallDarkButton({
   textName,
   onPressfunction,
   disabled = false,
@@ -24,11 +24,9 @@ export default function smallDarkButton({
       {loading ? (
         <LoaderBars />
       ) : (
-        <View>
-          <Text style={[styles.text, isDisabled && styles.textDisabled]}>
-            {textName}
-          </Text>
-        </View>
+        <Text style={[styles.text, isDisabled && styles.textDisabled]}>
+          {textName}
+        </Text>
       )}
     </Pressable>
   );
@@ -36,30 +34,32 @@ export default function smallDarkButton({
 
 const styles = StyleSheet.create({
   button: {
-    paddingHorizontal: 12,
-    paddingVertical: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 40,
-    alignItems: "center",
-    gap: 10,
-    justifyContent: "center",
     width: 176,
-    height: 12,
-    gap:10,
+    height: 42, // ✔️ Corrected height
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     backgroundColor: COLORS.Tiber[700],
   },
   buttonPressed: {
-    // opacity: 0.7,
+    opacity: 0.7,
     backgroundColor: COLORS.Tiber[500],
   },
   buttonDisabled: {
     backgroundColor: COLORS.Tiber[100],
-    // opacity: 0.5,
+    opacity: 0.5,
   },
   text: {
-    ...FONTS.Medium.Body[4],
+    ...FONTS.Medium.Body[2], // ✔️ More readable small variant (14px)
+    lineHeight: 20,         // ✔️ Center text vertically
     color: COLORS.primary.white,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   textDisabled: {
-    color: COLORS.primary.white,
+    color: COLORS.primary.white + "80",
   },
 });

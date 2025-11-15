@@ -6,7 +6,7 @@ import Ellipsis from "../../assets/images/ellipsis-vertical.svg";
 import COLORS from "../../constants/Color";
 
 
-export default function arrowHeartDotsDark({ EllipsisFunction, arrowFunction, showHeart = true, showEllipsis = true, showALL = true, }) {
+export default function arrowHeartDotsDark({ EllipsisFunction, arrowFunction, showHeart = true, showEllipsis = true, showALL = false, }) {
   const [Heart, setHeart] = useState(false);
 
 

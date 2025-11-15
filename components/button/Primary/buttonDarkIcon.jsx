@@ -1,13 +1,12 @@
-import { StyleSheet, Text, Pressable, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import COLORS from "../../../constants/Color";
 import FONTS from "../../../constants/fonts";
-import { LoaderBars } from "../../LoaderBars"; // <-- import it
+import { LoaderBars } from "../../LoaderBars";
 
-export default function buttonDarkIcon({
+export default function ButtonDarkIcon({
   textName,
   onPressfunction,
   icon,
-  iconSvg,
   disabled = false,
   loading = false,
 }) {
@@ -27,9 +26,7 @@ export default function buttonDarkIcon({
         <LoaderBars />
       ) : (
         <View style={styles.textBox}>
-            <View style={styles.iconBox}>
-          {iconSvg}
-            </View>
+          {icon && <View style={styles.iconBox}>{icon}</View>}
           <Text style={[styles.text, isDisabled && styles.textDisabled]}>
             {textName}
           </Text>
@@ -41,40 +38,44 @@ export default function buttonDarkIcon({
 
 const styles = StyleSheet.create({
   button: {
-    padding: 20,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
     borderRadius: 40,
     width: 346,
     height: 52,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    gap: 10,
+    gap: 8,
     backgroundColor: COLORS.Tiber[700],
   },
   buttonPressed: {
-    // opacity: 0.7,
+    opacity: 0.7,
     backgroundColor: COLORS.Tiber[500],
   },
   buttonDisabled: {
     backgroundColor: COLORS.Tiber[100],
-    // opacity: 0.5,
+    opacity: 0.5,
   },
   text: {
     ...FONTS.Medium.Body[1],
+    lineHeight: 24, // 👈 New: perfect alignment
     color: COLORS.primary.white,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   textDisabled: {
     color: COLORS.primary.white + "80",
   },
-  textBox:{
+  textBox: {
     flexDirection: "row",
-    gap:10,
-    justifyContent: "center",
-    alignItems:"center",
+    alignItems: "center",
+    gap: 8,
   },
-  iconBox:{
-    width:24,
-    height:24,
-    flexShrink:0,
-  }
+  iconBox: {
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
