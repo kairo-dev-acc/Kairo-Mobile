@@ -5,20 +5,27 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Ellipsis from "../../assets/images/ellipsis-vertical.svg";
 import COLORS from "../../constants/Color";
 
-export default function arrowAndHeart({ EllipsisFunction, arrowFunction, }) {
+
+export default function arrowAndHeart({ EllipsisFunction, arrowFunction, showHeart = true, showEllipsis = true, showALL = true, }) {
   const [Heart, setHeart] = useState(false);
-  const [showHeart, setshowHeart] = useState(true);
+
+
   return (
     <View style={styles.backIcon}>
       <TouchableOpacity onPress={arrowFunction}>
         <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
       </TouchableOpacity>
       <View>
-        <View style={styles.info}>
-          {showHeart ? (
+
+        {
+          showALL ? (<View style={styles.info}>
+          <View>
+            {
+              showHeart ? (<>
+                {Heart ? (
             <TouchableOpacity
               onPress={() => {
-                setshowHeart(false);
+                setHeart(false);
               }}
             >
               <Feather name="heart" size={24} color="black" />
@@ -26,17 +33,32 @@ export default function arrowAndHeart({ EllipsisFunction, arrowFunction, }) {
           ) : (
             <TouchableOpacity
               onPress={() => {
-                setshowHeart(true);
+                setHeart(true);
               }}
             >
               <FontAwesome name="heart" size={24} color={COLORS.primary.Heart} />
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity onPress={EllipsisFunction}>
+              </>) : (
+                <>
+                </>
+              )
+            }
+          </View>
+        {
+          showEllipsis ? (<TouchableOpacity onPress={EllipsisFunction}>
             <Ellipsis />
-          </TouchableOpacity>
-        </View>
+          </TouchableOpacity>) : (
+            <>
+            </>
+          )
+        }
+          
+        </View>) : (<>
+        </>)
+        }
+        
       </View>
     </View>
   );
