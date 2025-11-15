@@ -18,7 +18,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FaceId from "../../assets/images/ios-Face-ID.svg";
-import Button from "../../components/button/Dark/buttonDarkIcon.jsx";
+import Button from "../../components/button/Primary/buttonDark.jsx";
 
 // ------------------------------------------------------------
 // Step 1: Email Verification Screen

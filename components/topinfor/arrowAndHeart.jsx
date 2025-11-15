@@ -1,32 +1,40 @@
 import Feather from "@expo/vector-icons/Feather";
-import { useRouter } from "expo-router";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Ellipsis from "../../assets/images/ellipsis-vertical.svg";
 import COLORS from "../../constants/Color";
-import Ellipsis from "../../assets/images/ellipsis-vertical.svg"
 
-export default function arrowAndHeart({EllipsisFunction, }) {
+export default function arrowAndHeart({ EllipsisFunction, arrowFunction, }) {
   const [Heart, setHeart] = useState(false);
-  const [showHeart, setshowHeart] = useState(false);
-  const Router = useRouter();
+  const [showHeart, setshowHeart] = useState(true);
   return (
     <View style={styles.backIcon}>
-      <TouchableOpacity
-        onPress={() => {
-          Router.back = "/(auth)";
-        }}
-      >
+      <TouchableOpacity onPress={arrowFunction}>
         <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
       </TouchableOpacity>
-    {
-      showHeart ? : null
-    }
-      
+      <View>
+        <View style={styles.info}>
+          {showHeart ? (
+            <TouchableOpacity
+              onPress={() => {
+                setshowHeart(false);
+              }}
+            >
+              <Feather name="heart" size={24} color="black" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                setshowHeart(true);
+              }}
+            >
+              <FontAwesome name="heart" size={24} color={COLORS.primary.Heart} />
+            </TouchableOpacity>
+          )}
 
-        <View>
           <TouchableOpacity onPress={EllipsisFunction}>
-          <Ellipsis/>
+            <Ellipsis />
           </TouchableOpacity>
         </View>
       </View>
@@ -40,10 +48,10 @@ const styles = StyleSheet.create({
     paddingBottom: 7,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:"flex-start",
+    alignItems: "flex-start",
   },
-  info:{
+  info: {
     flexDirection: "row",
-    gap: 23.5,
+    gap: 28.95,
   },
 });

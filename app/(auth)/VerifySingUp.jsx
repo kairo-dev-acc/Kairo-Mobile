@@ -20,10 +20,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FaceId from "../../assets/images/ios-Face-ID.svg";
-import Button from "../../components/button/Dark/buttonDarkIcon.jsx";
+import Button from "../../components/button/Primary/buttonDark.jsx";
 import Input from "../../components/userInput/InPut.jsx";
 import Labelinput from "../../components/userInput/Labelinput.jsx";
-import SmallButton from "../../components/button/Dark/smallDarkButton.jsx";
+import SmallButton from "../../components/button/Primary/smallDarkButton.jsx";
 const RegistrationFlow = () => {
   const [step, setStep] = useState(0);
   const [FirstName, setFirstName] = useState("");
