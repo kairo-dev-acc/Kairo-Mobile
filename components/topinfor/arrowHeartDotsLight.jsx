@@ -6,14 +6,14 @@ import Ellipsis from "../../assets/images/ellipsis-vertical.svg";
 import COLORS from "../../constants/Color";
 
 
-export default function arrowAndHeart({ EllipsisFunction, arrowFunction, showHeart = true, showEllipsis = true, showALL = true, }) {
+export default function arrowHeartDotsLigth({ EllipsisFunction, arrowFunction, showHeart = true, showEllipsis = true, showALL = true, }) {
   const [Heart, setHeart] = useState(false);
 
 
   return (
     <View style={styles.backIcon}>
       <TouchableOpacity onPress={arrowFunction}>
-        <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
+        <Feather name="arrow-left" size={24} color={COLORS.primary.white} />
       </TouchableOpacity>
       <View>
 
@@ -28,7 +28,7 @@ export default function arrowAndHeart({ EllipsisFunction, arrowFunction, showHea
                 setHeart(false);
               }}
             >
-              <Feather name="heart" size={24} color="black" />
+              <Feather name="heart" size={24} color={COLORS.primary.white} />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
