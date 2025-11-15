@@ -1,6 +1,6 @@
 // FOREST
 const COLORS = {
-  emerald : {
+  emerald: {
     50: "#EEFFF5",
     100: "#D6FFEB",
     200: "#B0FFD9",
@@ -66,10 +66,11 @@ const COLORS = {
     950: "#1E1E1E",
   },
   primary: {
-  bridesmaid: "#fff0ec",
-  thunderbird: "#c13515",
-  aqua_haze: "#eaf4f5",
-  white: "#ffffff",
+    white: "#ffffff",
+    aqua_haze: "#eaf4f5",
+    Errorbackground: "#fff0ec",
+    Error: "#c13515",
+    Heart: "#C51104",
   },
 };
 

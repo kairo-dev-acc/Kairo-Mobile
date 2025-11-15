@@ -7,7 +7,6 @@
 // -----------------------------------------------------------------------------
 
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
@@ -16,8 +15,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singUp.js";
-import Button from "../../components/button/button.jsx";
-import Input from "../../components/InPut.jsx";
+import Button from "../../components/button/Dark/buttonDarkIcon.jsx";
+import Input from "../../components/userInput/LabelinputIcon.jsx";
+import  ArrowAndHeart from "../../components/topinfor/arrowAndHeart.jsx"
 import COLORS from "../../constants/Color.js";
 
 
@@ -61,11 +61,9 @@ export default function Signup() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.inner}>
           {/* Back button */}
-          <Link asChild href="/(auth)" dismissTo>
-            <TouchableOpacity style={styles.backIcon}>
-              <Feather name="arrow-left" size={24} color={COLORS.shark[900]} />
-            </TouchableOpacity>
-          </Link>
+
+             <ArrowAndHeart/>
+
 
           {/* Logo */}
           <View style={styles.logoContainer}>
@@ -78,6 +76,7 @@ export default function Signup() {
 
             <View style={{ marginBottom: 24 }}>
               <Input
+              LabelName='nosa'
                 value={email}
                 onChange={handleChange}
                 placeholder="Enter email address"

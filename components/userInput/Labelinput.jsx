@@ -1,6 +1,6 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View, Animated } from "react-native";
+import { Animated, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Labelinput({
   value: propValue = "",
@@ -59,11 +59,7 @@ export default function Labelinput({
       inputRange: [0, 1],
       outputRange: [12, 10],
     }),
-    color: error
-      ? "#D93025"
-      : isFocused
-      ? "#474747ff"
-      : "#777",
+    color: error ? "#D93025" : isFocused ? "#474747ff" : "#777",
   };
 
   return (

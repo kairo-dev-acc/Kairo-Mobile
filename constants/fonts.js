@@ -204,7 +204,7 @@ const FONTS = {
         fontFamily: "Poppins-Medium",
         fontSize: 35.84,
         fontWeight: "500",
-        lineHeight: 14.4,
+        // lineHeight: 14.4,
       },
       2: {
         fontFamily: "Poppins-Medium",

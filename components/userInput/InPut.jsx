@@ -7,6 +7,8 @@
 // -----------------------------------------------------------------------------
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import COLORS from "../../constants/Color";
+import FONTS from "../../constants/fonts";
 import { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -14,7 +16,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-export default function Input({
+export default function Inputicon({
   value: propValue = "",
   onChange,
   placeholder,
@@ -44,7 +46,7 @@ export default function Input({
             error ? styles.inputError : null,
           ]}
           placeholder={placeholder}
-          placeholderTextColor={error ? "#D93025" : "#999"}
+          placeholderTextColor={error ? COLORS.primary.thunderbird : "#999"}
           value={text}
           onChangeText={handleChange}
           onFocus={() => setIsFocused(true)}
@@ -56,7 +58,7 @@ export default function Input({
         {error ? (
           <View style={styles.errorContainer}>
             <Text style={styles.errorIcon}>
-              <MaterialIcons name="error" size={16} color="#D93025" />
+              <MaterialIcons name="error" size={20} color={COLORS.primary.thunderbird} />
             </Text>
             <Text style={styles.errorText}>{error}</Text>
           </View>
@@ -67,16 +69,19 @@ export default function Input({
 
 const styles = StyleSheet.create({
   input: {
+    gap: 4,
+    height: 48,
     backgroundColor: "#F6F6F6",
-    height: 50,
     paddingVertical: 16,
     paddingHorizontal: 12,
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: "400",
-    marginHorizontal: 27,
+    borderRadius: 12,
+    flexDirection: "column",
+    alignItems:"center",
+    justifyContent:"center",
+    alignSelf:"stretch",
     color: "#000",
-    // width: 346,
+    ...FONTS.Regular.Body[1],
+    width: 346,
   },
   inputFocused: {
     borderColor: "#393838ff",
@@ -86,22 +91,21 @@ const styles = StyleSheet.create({
     borderColor: "#393838ff",
   },
   inputError: {
-    borderColor: "#D93025",
+    borderColor:  COLORS.primary.thunderbird,
     backgroundColor: "#FFF2F2",
+    borderWidth: 2,
   },
   errorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginHorizontal: 27,
-  },
+    marginTop: 12,
+    gap: 4,
+    },
   errorIcon: {
-    color: "#D93025",
-    marginRight: 6,
-    fontSize: 14,
+    color: COLORS.primary.thunderbird,
   },
   errorText: {
-    color: "#D93025",
-    fontSize: 14,
+    color: COLORS.primary.thunderbird,
+    ...FONTS.Regular.Body[3]
   },
 });

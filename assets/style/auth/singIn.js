@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
   },
-  backIcon: {
-    marginHorizontal: 23,
-    paddingTop: 30,
-    paddingBottom: 39,
-  },
   logoContainer: {
     alignItems: "center",
   },

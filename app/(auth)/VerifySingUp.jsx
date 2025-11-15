@@ -20,11 +20,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FaceId from "../../assets/images/ios-Face-ID.svg";
-import Button from "../../components/button.jsx";
-import Input from "../../components/InPut.jsx";
-import Labelinput from "../../components/Labelinput.jsx";
-import ResendSMS from "../../components/resendSMS.jsx";
-
+import Button from "../../components/button/Dark/buttonDarkIcon.jsx";
+import Input from "../../components/userInput/InPut.jsx";
+import Labelinput from "../../components/userInput/Labelinput.jsx";
+import SmallButton from "../../components/button/Dark/smallDarkButton.jsx";
 const RegistrationFlow = () => {
   const [step, setStep] = useState(0);
   const [FirstName, setFirstName] = useState("");
@@ -207,10 +206,8 @@ const RegistrationFlow = () => {
                 ))}
               </View>
               <Text style={styles.subtitle_two}>Didn’t receive the code?</Text>
-              <ResendSMS
+              <SmallButton
                 textName="Resend SMS"
-                TextColor="#156F70"
-                backgroundColor="#CFF8F3"
                 onPressfunction={handleContinue}
               />
               <Text style={styles.subtitle}>Try again in 0:24 seconds.</Text>

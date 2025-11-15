@@ -22,8 +22,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GoogleIcon from "../../assets/images/google.svg";
 import Kairologo from "../../assets/images/Kairo-Logo.svg";
 import styles from "../../assets/style/auth/singIn.js";
-import Button from "../../components/button.jsx";
-import Input from "../../components/InPut.jsx";
+import Button from "../../components/button/Dark/buttonDarkIcon.jsx";
+import Input from "../../components/userInput/LabelinputIcon.jsx";
+import ArrowAndHeart from "../../components/topinfor/arrowAndHeart.jsx";
 import COLORS from "../../constants/Color.js";
 
 export default function Signin() {
